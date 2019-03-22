@@ -69,6 +69,7 @@ node_templates:
   db_requirements:
     type: cloudify.azure.nodes.compute.VirtualMachineExtension
     properties:
+      name: {concat:[{get_input: resource_prefix},vmext,{get_input: resource_suffix}]}
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       azure_config: *azure_config
@@ -90,6 +91,7 @@ node_templates:
   host:
     type: cloudify.azure.nodes.compute.VirtualMachine
     properties:
+      name: {concat:[{get_input: resource_prefix},vm,{get_input: resource_suffix}]}
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       os_family: linux
@@ -134,6 +136,7 @@ node_templates:
   host_nic:
     type: cloudify.azure.nodes.network.NetworkInterfaceCard
     properties:
+      name: {concat:[{get_input: resource_prefix},nic,{get_input: resource_suffix}]}
       location: { get_secret: azure_location }
       azure_config: *azure_config
       retry_after: { get_input: retry_after }
@@ -148,6 +151,7 @@ node_templates:
   host_nic_ip_cfg:
     type: cloudify.azure.nodes.network.IPConfiguration
     properties:
+      name: {concat:[{get_input: resource_prefix},ip,{get_input: resource_suffix}]}
       location: { get_secret: azure_location }
       azure_config: *azure_config
       retry_after: { get_input: retry_after }
@@ -230,6 +234,7 @@ node_templates:
   storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
     properties:
+      name: {concat:[{get_input: resource_prefix},sa,{get_input: resource_suffix}]}
       location: { get_secret: azure_location }
       azure_config: *azure_config
       retry_after: { get_input: retry_after }
